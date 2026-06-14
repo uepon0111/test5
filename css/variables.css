@@ -1,0 +1,76 @@
+/* ===== Design Tokens ===== */
+:root {
+  /* --- Primary Palette (Blue) --- */
+  --c-primary:        #2563EB;
+  --c-primary-hover:  #1D4ED8;
+  --c-primary-dark:   #1E40AF;
+  --c-primary-light:  #EFF6FF;
+  --c-primary-muted:  #BFDBFE;
+
+  /* --- Neutral Backgrounds --- */
+  --c-bg-base:        #FFFFFF;
+  --c-bg-surface:     #F8FAFC;
+  --c-bg-elevated:    #FFFFFF;
+  --c-bg-hover:       #F1F5F9;
+  --c-bg-active:      #EFF6FF;
+
+  /* --- Text --- */
+  --c-text-900:       #0F172A;
+  --c-text-700:       #334155;
+  --c-text-500:       #64748B;
+  --c-text-300:       #CBD5E1;
+  --c-text-on-primary:#FFFFFF;
+
+  /* --- Borders --- */
+  --c-border:         #E2E8F0;
+  --c-border-strong:  #CBD5E1;
+  --c-border-focus:   #2563EB;
+
+  /* --- Status --- */
+  --c-success:        #10B981;
+  --c-success-light:  #D1FAE5;
+  --c-warning:        #F59E0B;
+  --c-warning-light:  #FEF3C7;
+  --c-danger:         #EF4444;
+  --c-danger-hover:   #DC2626;
+  --c-danger-light:   #FEE2E2;
+
+  /* --- Shadows --- */
+  --shadow-xs:  0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.10);
+  --shadow-lg:  0 8px 28px rgba(0,0,0,0.14);
+  --shadow-xl:  0 20px 48px rgba(0,0,0,0.20);
+
+  /* --- Border Radius --- */
+  --r-xs:   4px;
+  --r-sm:   6px;
+  --r-md:   10px;
+  --r-lg:   14px;
+  --r-xl:   20px;
+  --r-full: 9999px;
+
+  /* --- Layout --- */
+  --nav-width:         72px;
+  --player-w:          288px;
+  --mini-player-h:     68px;
+  --nav-h:             60px;
+  --header-h:          52px;
+
+  /* --- Typography --- */
+  --font-sans:   'Noto Sans JP', system-ui, -apple-system, sans-serif;
+  --font-mono:   'SF Mono', 'Fira Code', monospace;
+
+  /* --- Transitions --- */
+  --t-fast:   0.15s ease;
+  --t-normal: 0.25s ease;
+  --t-slow:   0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- Z-index layers --- */
+  --z-base:      1;
+  --z-sticky:    10;
+  --z-overlay:   100;
+  --z-modal:     200;
+  --z-toast:     300;
+  --z-player-bs: 150;
+}

@@ -1,0 +1,135 @@
+/* ===== Landscape (横画面) ===== */
+@media (orientation: landscape) {
+  #app { flex-direction: row; }
+
+  #main-nav {
+    flex-direction: column;
+    width: var(--nav-width);
+    height: 100dvh; height: 100vh;
+    border-right: 1px solid var(--c-border);
+    border-bottom: none;
+    padding: 12px 8px;
+    flex-shrink: 0;
+  }
+
+  /* Player widget: shown only when player screen is active */
+  #player-widget {
+    display: none;
+    flex-direction: column;
+    width: var(--player-w);
+    flex-shrink: 0;
+    border-right: 1px solid var(--c-border);
+    overflow-y: auto;
+    background: var(--c-bg-base);
+    /* Override portrait fixed positioning */
+    position: static !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    z-index: auto !important;
+  }
+  #app.screen-player #player-widget { display: flex; }
+
+  #main-content { flex: 1; min-width: 0; }
+  #mini-player  { display: none !important; }
+
+  #screen-player.active { display: flex; flex-direction: row; }
+  #screen-editor.active, #screen-log.active, #screen-settings.active {
+    display: flex; flex-direction: column;
+  }
+
+  .log-two-col   { grid-template-columns: 1fr 1fr; }
+  .log-stats-grid{ grid-template-columns: repeat(3, 1fr); }
+
+  /* Editor columns landscape */
+  .editor-col-4 { } /* handled inline by VirtualGrid */
+  .editor-col-6 { }
+}
+
+/* ===== Portrait (縦画面) ===== */
+@media (orientation: portrait) {
+  #app {
+    flex-direction: column;
+  }
+  #main-nav {
+    order: 3;
+    flex-direction: row;
+    height: var(--nav-h);
+    width: 100%;
+    border-top: 1px solid var(--c-border);
+    border-right: none;
+    padding: 4px 8px;
+    justify-content: space-around;
+    flex-shrink: 0;
+  }
+  #main-nav .nav-logo { display: none; }
+  .nav-btn {
+    flex: 1; max-width: 80px;
+    padding: 6px 4px;
+    font-size: 0.64rem;
+  }
+
+  #main-content { order: 1; flex: 1; min-height: 0; overflow: hidden; }
+  #mini-player  { order: 2; display: flex !important; flex-shrink: 0; }
+
+  /* Player widget as bottom sheet overlay */
+  #player-widget {
+    position: fixed !important;
+    bottom: 0; left: 0; right: 0;
+    height: 92dvh; height: 92vh;
+    background: var(--c-bg-base);
+    border-top: 1px solid var(--c-border);
+    border-radius: var(--r-xl) var(--r-xl) 0 0 !important;
+    box-shadow: var(--shadow-xl) !important;
+    transform: translateY(100%);
+    transition: transform var(--t-slow);
+    z-index: var(--z-player-bs) !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    max-height: 92dvh; max-height: 92vh;
+  }
+  #player-widget.open { transform: translateY(0) !important; }
+  /* Limit art wrap height in portrait sheet so controls are visible */
+  #player-widget .pw-art-wrap { max-height: 40vh; overflow: hidden; }
+
+  #player-backdrop { display: block; }
+
+  #screen-player.active { display: flex; flex-direction: column; }
+  #screen-editor.active, #screen-log.active, #screen-settings.active {
+    display: flex; flex-direction: column;
+  }
+
+  .log-two-col    { grid-template-columns: 1fr; }
+  .log-stats-grid { grid-template-columns: repeat(3, 1fr); }
+
+  #toast-container {
+    bottom: calc(var(--nav-h) + var(--mini-player-h) + 8px);
+    right: 12px;
+  }
+}
+
+/* ===== Small landscape (phones rotated) ===== */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root { --player-w: 240px; }
+  .pw-art-wrap { max-height: 36vh; }
+  .pw-info { padding: 8px 14px 4px; }
+  .pw-seek-wrap { padding: 4px 14px; }
+  .pw-controls { padding: 2px 10px 6px; }
+  .pw-rate-row  { padding: 0 14px 8px; }
+}
+
+/* ===== Very small portrait ===== */
+@media (orientation: portrait) and (max-width: 380px) {
+  :root { --nav-h: 56px; }
+  .nav-btn svg { width: 18px; height: 18px; }
+  .log-stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-value { font-size: 1.1rem; }
+}
+
+/* ===== Large desktop landscape ===== */
+@media (orientation: landscape) and (min-width: 1400px) {
+  :root { --player-w: 320px; }
+}
