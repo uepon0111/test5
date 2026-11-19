@@ -1,0 +1,20 @@
+/* css/base.css — 共通: 変数・リセット・ボタン・フォーム・パネル */
+:root{--bg:#f3f7fb;--panel:#fff;--ink:#2b3a4a;--sub:#6b7b8c;--line:#dde6ee;--acc:#2f7de1;--accbg:#e6f0ff;--rt:#f08c1a;--bad:#d9382f}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.4 "Hiragino Sans","Yu Gothic UI",Meiryo,system-ui,sans-serif}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+input,select{-webkit-user-select:text;user-select:text}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+[hidden]{display:none!important}
+svg{width:20px;height:20px;flex:none}
+button{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 10px;border:0;border-radius:10px;background:transparent;color:var(--ink);font:inherit;white-space:nowrap;cursor:pointer}
+@media(hover:hover){button:hover{background:#eef3f8}}
+button:focus-visible{outline:2px solid var(--acc)}
+button.on{background:var(--accbg);color:var(--acc);font-weight:600}
+button.pri{background:var(--acc);color:#fff;font-weight:600}
+button.pri:hover{background:#2468c4}
+button.danger:hover{background:#fdecec;color:var(--bad)}
+label{display:flex;align-items:center;gap:6px;color:var(--sub);padding:0 4px}
+select,input[type=number],input[type=time]{height:34px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit}
+input[type=range]{width:90px;accent-color:var(--acc)}
+.panel{pointer-events:auto;touch-action:manipulation;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 22px rgba(40,70,110,.16)}

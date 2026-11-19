@@ -1,0 +1,61 @@
+/* css/components.css — 追加分: 地図上ボタン・ダイヤ一覧・列車パネル・3D/作業中の表示切替 */
+/* ---- 追加: 左右上パネル / 一覧の見切れ / 選択・設定済み / 操作中の非表示 ---- */
+#map{position:relative}
+#tl,#tr{position:absolute;top:0;display:flex;gap:2px;padding:4px;pointer-events:auto}
+#tl{left:0}#tr{right:0}
+#tl button,#tr button{width:38px;height:38px;padding:0;justify-content:center}
+body.busy #bar #tg,body.busy #tr{display:none!important}
+#pos:empty{display:none}
+#foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,640px) minmax(0,1fr);align-items:end}
+#hint{grid-column:2;text-align:center}#pos{grid-column:3;justify-self:end}
+#selp,#act{min-width:min(100%,460px)}
+#dia{overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding-top:0}.dtop{display:flex;flex-direction:column;gap:10px;margin:0 -12px;padding:12px 12px 8px;background:var(--panel);border-radius:11px 11px 0 0}#tlist{overflow-x:hidden}@media(min-width:961px) and (pointer:fine){.dtop{position:sticky;top:0;z-index:3}#dia{scroll-padding-top:112px}}@media(max-width:380px){.dh button span{display:none}}
+#dlist{flex:none;min-height:0;overflow:visible}
+#dlist li{display:grid;grid-template-columns:24px minmax(0,1fr);align-items:start;gap:4px 8px;padding:8px 10px;border-left-width:4px}
+#dlist .no{grid-row:1;margin-top:1px}
+#dlist .nm{grid-column:2;grid-row:1;white-space:normal;overflow:visible;overflow-wrap:anywhere;font-weight:600}
+#dlist select{grid-column:2;grid-row:2;width:100%;max-width:100%;min-width:0;text-overflow:ellipsis}
+#dlist .sub{grid-column:2;grid-row:3;padding-left:0;flex-wrap:wrap}
+#dlist .eta{flex:1 1 auto;min-width:0}
+#dlist li.sel{border-color:var(--rt);background:#fff6e8;box-shadow:0 0 0 2px rgba(240,140,26,.3)}
+#dlist li.set{border-left-color:var(--rt)}
+.tg{display:none;margin-left:6px;padding:0 7px;border-radius:9px;background:#ffe9cc;color:#a85d05;font:600 11px/18px system-ui,sans-serif;vertical-align:1px}
+#dlist li.set .tg{display:inline-block}
+@media(pointer:coarse),(max-width:960px){#dia{max-height:min(60vh,500px)}#dia.wide{max-height:min(64vh,500px)}#tl,#tr{padding:3px}#tr button{width:44px;height:44px}}
+/* ---- 追加: 項目の種類別の配色 / 発車時刻の既定値 / 複製 ---- */
+#dlist li.kg{border-left-color:#2f7de1}#dlist li.kt{border-left-color:#8e44ad}#dlist li.kp{border-left-color:#7b8794}#dlist li.kb{border-left-color:#d6336c}
+#dlist li.kg .no{background:#2f7de1}#dlist li.kt .no{background:#8e44ad}#dlist li.kp .no{background:#7b8794}#dlist li.kb .no{background:#d6336c}
+#dlist li.cur{border-color:#1fa971;background:#e9f8f1}#dlist li.cur .no{box-shadow:0 0 0 3px rgba(31,169,113,.45)}
+#dlist li.sel{border-color:#1f2d3d;background:#f1f5f9;box-shadow:0 0 0 2px rgba(31,45,61,.22)}
+.sub input.df{color:var(--sub);font-style:italic}
+.dr{flex-wrap:wrap}
+#dia :disabled{opacity:.55;cursor:not-allowed}
+/* ---- 列車パネル: 追加 / ダイヤ設定 / ダイヤグラム、列車一覧、ループ前後の行 ---- */
+#ttabs{display:flex;gap:2px;padding:2px;border-radius:10px;background:#eef3f8}
+#ttabs button{flex:1;justify-content:center;height:32px;padding:0 6px;border-radius:8px;font-size:13px}
+#ttabs button.on{background:#fff;color:var(--acc);font-weight:600;box-shadow:0 1px 3px rgba(40,70,110,.22)}
+#tlist{position:relative;flex:none;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;max-height:min(176px,26vh);overflow-y:auto;touch-action:pan-y}
+#tlist li{display:flex;align-items:center;gap:8px;min-height:36px;padding:4px 8px;border:1px solid var(--line);border-left:4px solid #b9c8d8;border-radius:10px;cursor:pointer}
+#tlist li.c{margin-left:18px}
+#tlist li.on{border-color:var(--rt);border-left-color:var(--rt);background:#fff6e8}
+#tlist li.empty{color:var(--sub);border-style:dashed;cursor:default}
+#tlist .no{flex:none;min-width:22px;height:22px;border-radius:11px;background:var(--rt);color:#fff;font:700 12px/22px system-ui,sans-serif;text-align:center}
+#tlist li.c .no{background:#b9c8d8}
+#tlist .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+#tlist small{flex:none;max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--sub);font-size:12px}
+#tact{flex-wrap:nowrap}
+#tsel{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+#tsel::before{content:"選択中: ";color:var(--sub);font-weight:400}
+#tact div{display:flex;flex:none;gap:2px}
+#dlist li.ghost{opacity:.62;border-style:dashed;cursor:default;background:transparent}
+#dlist li.ghost .nm{font-weight:400}
+#dlist li.ghost small:first-child{margin-right:6px;color:var(--rt);font-weight:600}
+/* ---- 追加: 向きの選択 / パネルを畳む / 作業中は不要なパネルを隠す / ダイヤ設定中も地図を見せる ---- */
+#dlist li.ghost{opacity:.85}#dleg summary{cursor:pointer;color:var(--sub);font-size:12px;padding:2px 0}#dleg p{margin-top:4px}
+.ar{width:14px;height:14px;margin:0 3px;vertical-align:-2px;color:var(--sub)}#tlist .no svg{width:14px;height:14px;vertical-align:-3px}
+#dia.min>:not(.dtop){display:none!important}#dia.min #ttabs{display:none}#dia.min .dtop{position:static;margin:0;padding:12px 0 0}#dia.min,#dia.min.wide{width:auto;max-height:none}
+body[data-md] #tr,body[data-md=dia] #tg,body[data-md=lay] #tg,body[data-md=dia] #pos,body[data-md=dia] #tl{display:none!important}
+body[data-md=dia] #tg+.grp,body[data-md=lay] #tg+.grp{padding-left:0;border-left:0}
+@media(min-width:961px) and (pointer:fine){#dia.wide{width:min(560px,48vw)}}
+@media(pointer:coarse),(max-width:960px){body[data-md=dia] #dia,body[data-md=dia] #dia.wide{max-height:min(44vh,380px)}}
+@media(pointer:coarse),(max-width:960px){#tlist{max-height:min(136px,20vh)}#dia #ttabs button{height:40px}}

@@ -1,0 +1,114 @@
+/* css/layout.css — 画面レイアウト・上バー・選択/操作パネル・ダイヤパネルの基本・レスポンシブ */
+/* 画面を 上=ツール / 中央=地図 / 右=ダイヤ / 下=操作とヒント に区切り、各パネルは自分の区画に置く(重ならない) */
+#ui{position:fixed;inset:0;z-index:1;display:grid;pointer-events:none;row-gap:8px;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr) auto auto;grid-template-areas:"bar bar" "map side" "dock side" "foot side";padding:calc(10px + env(safe-area-inset-top,0px)) calc(10px + env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) calc(10px + env(safe-area-inset-left,0px))}
+#map{grid-area:map}
+#bar{grid-area:bar;justify-self:center;max-width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 8px;padding:6px 8px}
+.brand{display:flex;align-items:center;gap:6px;padding:0 10px 0 6px;border-right:1px solid var(--line);color:var(--acc);font-weight:700;white-space:nowrap}
+.grp{display:flex;align-items:center;gap:2px}
+.grp+.grp{padding-left:8px;border-left:1px solid var(--line)}
+#dock{grid-area:dock;justify-self:center;display:flex;flex-direction:column;align-items:center;gap:8px;max-width:100%;pointer-events:none}
+#selp,#act{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 14px;max-width:100%}
+#sinfo{flex:1;min-width:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#act b{padding-right:6px;color:var(--acc);white-space:nowrap}
+#foot{grid-area:foot;display:flex;justify-content:space-between;align-items:flex-end;gap:8px;pointer-events:none}
+#hint{flex:0 1 640px;min-width:0;padding:8px 12px;color:var(--sub);font-size:12.5px}
+#pos{flex:none;padding:6px 10px;color:var(--sub);font-size:12.5px;font-variant-numeric:tabular-nums}
+#dia{grid-area:side;align-self:start;width:340px;max-height:100%;margin-left:8px;display:flex;flex-direction:column;gap:10px;padding:12px;border-top:3px solid var(--rt)}
+.dh,.dr{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.dh b{display:flex;align-items:center;gap:6px;font-size:15px}
+.dh b svg{color:var(--rt)}
+.dh div{display:flex;gap:2px}
+.dn{display:flex;flex-wrap:wrap;gap:2px 12px;margin:0;color:var(--sub);font-size:12px}
+.dn span{display:inline-flex;align-items:center;gap:5px}
+.chip{width:14px;height:6px;border-radius:3px}
+#dw{width:64px;padding:0 6px}
+#dlist{position:relative;flex:1 1 auto;min-height:0;margin:0;padding:0;list-style:none;overflow-y:auto;display:flex;flex-direction:column;gap:6px;touch-action:pan-y}
+#dlist li{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+#dlist li:hover{border-color:#b9c8d8}
+#dlist .no{flex:none;width:22px;height:22px;border-radius:50%;background:var(--rt);color:#fff;font:700 12px/22px system-ui,sans-serif;text-align:center}
+#dlist .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dlist .nm small{color:var(--sub);font-size:12px}
+#dlist li.cur{border-color:var(--acc);background:var(--accbg)}
+#dlist li.cur .no{background:var(--acc)}
+#dlist li.empty{color:var(--sub);border-style:dashed;cursor:default}
+#dlist select{flex:none;max-width:50%}
+#dlist li{flex-wrap:wrap}
+.sub{flex:1 0 100%;display:flex;align-items:center;gap:6px;padding-left:30px;color:var(--sub);font-size:12px;font-variant-numeric:tabular-nums}
+.sub label{margin-left:auto;padding:0;font-size:12px}
+.sub input{height:30px;width:100px;padding:0 4px}
+.sub .cl{height:28px;padding:0 8px;color:var(--sub)}
+.tn{width:56px;padding:0 6px}
+#clk{width:auto;min-width:112px;padding:0 6px;font-variant-numeric:tabular-nums}
+#dinfo.bad{color:var(--bad)}
+#gl{pointer-events:none}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#gcv{position:static;inset:auto;width:100%;height:clamp(170px,30vh,260px);touch-action:auto;background:#fbfdff;border:1px solid var(--line);border-radius:8px}
+#gv{display:flex;flex:none;flex-direction:column;gap:8px;min-height:0}
+#glg{display:flex;flex-wrap:wrap;gap:2px 4px}
+#glg button{height:28px;padding:0 8px;font-size:12px}
+.tabs{display:flex;gap:2px}
+#dia.wide{width:min(660px,62vw)}
+body{overscroll-behavior:none}
+#dlist select{max-width:60%}
+.stp{display:flex;align-items:center;gap:2px;color:var(--sub);font-size:13px;white-space:nowrap}
+.stp b{min-width:22px;text-align:center;color:var(--ink);font-variant-numeric:tabular-nums}
+.stp button{width:34px;height:34px;padding:0;justify-content:center;background:#eef3f8;font-size:18px;line-height:1}
+.stp button:hover{background:var(--accbg)}
+#psd{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;white-space:normal}
+#psd .seg{display:inline-flex;gap:2px;padding:2px;border-radius:10px;background:#eef3f8}
+#psd .seg button{width:auto;height:30px;padding:0 11px;border-radius:8px;background:transparent;font-size:13px;color:var(--ink)}
+#psd .seg button.on{background:#fff;color:var(--acc);font-weight:600;box-shadow:0 1px 3px rgba(40,70,110,.22)}
+#psd .seg button.no{opacity:.55}
+#psd #pfl{width:auto;padding:0 12px;font-size:13px}
+/* ---- レイアウト固定: 画面幅ごとに「どの行に何を置くか」を決め、折り返しで崩さない ----
+   上バー  : 広い画面=1行 (幅に応じて 文字つき→アイコンのみ) / 狭い・タッチ=3行 (ツール / 再生 / 表示)
+   選択パネル: 広い(900px〜)=行1[名前・番線数・ボタン] 行2[駅の設定] / 狭い=行1[名前・番線数] 行2[駅の設定(縦3段)] 行3[ボタン] */
+#bar{flex-wrap:nowrap}
+.spd{min-width:0}#spd{flex:0 1 90px;min-width:44px}#clk{flex:none}
+#dock{justify-self:stretch;container:dock/inline-size}
+#act{flex-wrap:wrap;row-gap:6px;justify-content:center}
+#selp{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"i p" "d d" "a a";align-items:center;column-gap:6px}
+#sinfo{grid-area:i;min-width:6em}#pst{grid-area:p}
+.acts{grid-area:a;display:flex;align-items:center;gap:6px;margin-top:6px}
+.acts button{flex:1;justify-content:center}
+#psd{grid-area:d;margin-top:6px;flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:6px}
+#psd .r{display:flex;align-items:center;gap:8px}
+#psd .k{flex:none;color:var(--sub)}
+#psd .r .seg{flex:1 1 auto}#psd .seg button{flex:1 1 0;justify-content:center;padding:0 4px}
+@container dock (min-width:900px){
+#selp{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"i p a" "d d d"}
+.acts{margin-top:0}
+#psd{flex-direction:row;justify-content:center;align-items:center;gap:14px}
+#psd .r .seg{flex:none}#psd .seg button{flex:none;padding:0 11px}
+}
+@media(max-width:1479px){.brand span{display:none}}
+@media(max-width:1319px){.lbl{display:none}}
+@media(pointer:coarse),(max-width:960px){
+#ui{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto auto;grid-template-areas:"foot" "map" "side" "dock" "bar"}
+#bar{width:100%}
+.brand,.zbtn,#pos{display:none}
+.grp+.grp{padding:0;border:0}
+.grp button{flex-direction:column;justify-content:center;gap:0;height:52px;min-width:52px;padding:0 6px;font-size:10.5px}
+.grp .lbl{display:block}
+.spd .lbl{display:none}
+input[type=range]{width:72px}
+#hint{flex:1;padding:6px 10px;font-size:12px;text-align:center}
+#dia{width:auto;margin:0;max-height:min(42vh,340px)}
+#dia button{height:44px;min-width:44px}
+input,select{font-size:16px}
+#dia.wide{width:auto;max-height:min(62vh,480px)}
+#selp,#act{width:100%;padding:8px}
+#act b{flex:1 0 100%}
+#act button{flex:1;justify-content:center}
+.acts button{height:48px;flex-direction:column;gap:2px;font-size:11px;padding:0 4px;min-width:0}
+#pst button{width:44px;height:44px;flex:none}
+#psd .seg button,#psd #pfl{height:40px;min-width:0}
+#psd .k{min-width:4.2em}
+#bar{flex-direction:column;align-items:stretch;gap:6px;width:min(100%,640px);padding:6px}
+#bar .grp{display:grid;gap:4px;padding:0;border:0}
+#bar .grp button{min-width:0}
+#bar .grp:nth-child(2){grid-template-columns:repeat(5,minmax(0,1fr))}
+#bar .grp:nth-child(3){grid-template-columns:52px 52px minmax(0,1fr) auto}
+#bar .grp:nth-child(4){grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.spd{display:flex;align-items:center;padding:0 8px}.spd input{width:100%}
+}
